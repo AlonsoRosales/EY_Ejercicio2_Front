@@ -2,7 +2,7 @@
     <h1 class="title">Screening de {{entidad}}</h1>
 </div>
 <h2 style="margin-left: 15px" *ngIf="isDataLoaded">Número de hits: {{hits}}</h2>
-<h3 style="margin-left: 15px" *ngIf="isDataLoaded">No se encontraron resultados</h3>
+<h3 style="margin-left: 15px" *ngIf="isDataLoaded && hits == 0">No se encontraron resultados</h3>
 <div class="mat-elevation-z8" *ngIf="fuente === 1 && hits != 0">
     <table mat-table [dataSource]="dataSourcePrimeraFuente" matSort>
         <ng-container matColumnDef="entity">
