@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
       icon: estado
     }).then((result) => {
       if(estado == "success"){
-        this.router.navigate(['/home/proveedores']);
+        this.router.navigate(['EY/home/proveedores']);
       }
     })
   }

@@ -3,6 +3,7 @@ import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} f
 import {ActivatedRoute, Router} from "@angular/router";
 import {EntityService} from "../../../../data/services/entity.service";
 import Swal from "sweetalert2";
+import {Proveedor} from "../../../../data/interfaces/proveedor.interface";
 
 @Component({
   selector: 'app-new-proveedor',
@@ -26,6 +27,8 @@ export class NewProveedorComponent implements OnInit {
     { nombre: 'Costa Rica', valor: 11 },
     { nombre: 'Panamá', valor: 12 },
   ];
+  private proveedorOriginal: Proveedor | null = null;
+
 
   urlValidator = (control: AbstractControl): ValidationErrors | null => {
     if (!control.value) {
@@ -45,15 +48,16 @@ export class NewProveedorComponent implements OnInit {
 
   /***  Definimos los campos de los formularios con sus validaciones*/
   public proveedorForm = new FormGroup({
-    razonsocial:  new FormControl<string>('',),
-    nombrecomercial:      new FormControl<string>('',),
-    idtributaria:      new FormControl<string>('',[Validators.minLength(11),Validators.maxLength(11)]),
-    telefono:      new FormControl<string>('',[Validators.pattern(/^\d+$/)]),
-    correo:      new FormControl<string>('',[Validators.email]),
-    web:      new FormControl<string>('',[this.urlValidator]),
-    direccion:      new FormControl<string>('',),
+    razonsocial:  new FormControl<string>('',Validators.required),
+    nombrecomercial:      new FormControl<string>('',[Validators.required]),
+    idtributaria:      new FormControl<string>('',[Validators.required, Validators.minLength(11),Validators.maxLength(11)]),
+    telefono:      new FormControl<string>('',[Validators.required, Validators.pattern(/^\d+$/)]),
+    correo:      new FormControl<string>('',[Validators.required, Validators.email]),
+    web:      new FormControl<string>('',[Validators.required, this.urlValidator]),
+    direccion:      new FormControl<string>('',[Validators.required]),
     pais: new FormControl<number>(1, ),
-    facturacion:      new FormControl<string>('', [this.numericValidator]),
+    facturacion:      new FormControl<string>('', [this.numericValidator, Validators.required]),
+
   });
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private entityService: EntityService) { }
@@ -66,9 +70,10 @@ export class NewProveedorComponent implements OnInit {
 
     this.entityService.infoProveedor(this.id).subscribe((proveedor) => {
       if (proveedor != null) {
+        this.proveedorOriginal = {...proveedor};
         const paisSeleccionado = this.paises.find(p => p.nombre === proveedor.pais);
         const valorPais = paisSeleccionado ? paisSeleccionado.valor : null;
-        console.log(proveedor)
+
         this.proveedorForm.patchValue({
           razonsocial:  proveedor.razonSocial,
           nombrecomercial: proveedor.nombreComercial,
@@ -91,14 +96,23 @@ export class NewProveedorComponent implements OnInit {
         telefono, correo, web, direccion,
         pais, facturacion} = this.proveedorForm.value;
       let paisSeleccionado = this.paises.find(p => p.valor === pais);
-      this.entityService.actualizarProveedor(this.id, String(razonsocial), String(nombrecomercial),String(idtributaria),String(telefono),
-          String(correo),String(web), String(direccion), paisSeleccionado.nombre, Number(facturacion)).subscribe(response => {
-        if (!response.error) {
-          this.showModal(response.msg, "Proveedor editado correctamente", "success");
-        }else {
-          this.showModal(response.msg, "Error al editar el proveedor", "error");
-        }
-      });
+
+      if(this.proveedorOriginal?.razonSocial == String(razonsocial) && this.proveedorOriginal?.nombreComercial == String(nombrecomercial)
+      && this.proveedorOriginal?.idTributaria == Number(idtributaria) && this.proveedorOriginal?.telefono == Number(telefono)
+      && this.proveedorOriginal?.correo == String(correo) && this.proveedorOriginal?.web == String(web)
+      && this.proveedorOriginal?.direccion == String(direccion) && this.proveedorOriginal?.pais == paisSeleccionado.nombre
+      && this.proveedorOriginal?.facturacion == Number(facturacion)){
+        this.showModal("Ningún parámetro ha sido cambiado", "No hubo modificaciones", "info");
+      }else{
+        this.entityService.actualizarProveedor(this.id, String(razonsocial), String(nombrecomercial),String(idtributaria),String(telefono),
+            String(correo),String(web), String(direccion), paisSeleccionado.nombre, Number(facturacion)).subscribe(response => {
+          if (!response.error) {
+            this.showModal(response.msg, "Proveedor editado correctamente", "success");
+          }else {
+            this.showModal(response.msg, "Error al editar el proveedor", "error");
+          }
+        });
+      }
     }
   }
 

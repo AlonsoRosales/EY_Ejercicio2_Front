@@ -99,7 +99,7 @@ export class ListaProveedoresComponent implements OnInit {
         })
       }
     }).then((result) => {
-      if(selectedFuente != null){
+      if(selectedFuente != null && selectedFuente != ""){
         const url = `/EY/home/proveedores/screening/${nombre}/${selectedFuente}`;
         const windowFeatures = 'width=800,height=600,left=100,top=100,menubar=no,toolbar=no,location=no,status=no';
         window.open(url, '_blank', windowFeatures);
@@ -120,12 +120,30 @@ export class ListaProveedoresComponent implements OnInit {
       if(result.isConfirmed){
         this.entidadService.eliminarProveedor(id).subscribe(
             (result) => {
-              this.router.navigate(['/EY/home/proveedores'])
+              this.cargarProveedores();
             },
             (error) =>{}
         );
       }
     })
+  }
+
+  cargarProveedores(): void {
+    this.entidadService.listaProveedores().subscribe(
+        (proveedores) => {
+          if (proveedores !== null) {
+            this.proveedores = proveedores;
+          }else{
+            this.proveedores = [];
+          }
+          this.dataSource.data = this.proveedores;
+        },
+        (error) => {
+          this.proveedores = [];
+          this.dataSource.data = this.proveedores;
+        }
+
+    );
   }
 
 }

@@ -9,35 +9,42 @@
                     <mat-form-field class="col-12" [ngStyle]="{'margin-top': '9px'}">
                         <mat-label [ngStyle]="{'color': 'rgb(255,0,0)', 'font-weight': 'bold'}">Razon Social</mat-label>
                         <input matInput type="text"  formControlName="razonsocial"/>
+                        <mat-error *ngIf="proveedorForm.get('razonsocial')?.hasError('required')">La razon social es requerida</mat-error>
                     </mat-form-field>
                     <mat-form-field class="col-12" [ngStyle]="{'margin-top': '9px'}">
                         <mat-label [ngStyle]="{'color': 'rgb(255,0,0)', 'font-weight': 'bold'}">Nombre Comercial</mat-label>
                         <input matInput type="text"  formControlName="nombrecomercial"/>
+                        <mat-error *ngIf="proveedorForm.get('nombrecomercial')?.hasError('required')">El nombre comercial es requerida</mat-error>
                     </mat-form-field>
                     <mat-form-field class="col-12" [ngStyle]="{'margin-top': '9px'}">
                         <mat-label [ngStyle]="{'color': 'rgb(255,0,0)', 'font-weight': 'bold'}">ID Tributario</mat-label>
                         <input matInput type="text"  formControlName="idtributaria"/>
+                        <mat-error *ngIf="proveedorForm.get('idtributaria')?.hasError('required')">El IdTributario es requerida</mat-error>
                         <mat-error *ngIf="proveedorForm.get('idtributaria')?.hasError('minlength')">El IdTributario debe tener 11 caracteres</mat-error>
                         <mat-error *ngIf="proveedorForm.get('idtributaria')?.hasError('maxlength')">El IdTributario debe tener 11 caracteres</mat-error>
                     </mat-form-field>
                     <mat-form-field class="col-12" [ngStyle]="{'margin-top': '9px'}">
                         <mat-label [ngStyle]="{'color': 'rgb(255,0,0)', 'font-weight': 'bold'}">Teléfono</mat-label>
                         <input matInput type="text"  formControlName="telefono"/>
+                        <mat-error *ngIf="proveedorForm.get('telefono')?.hasError('required')">El teléfono es requerida</mat-error>
                         <mat-error *ngIf="proveedorForm.get('telefono')?.hasError('pattern')">El teléfono debe tener sólo números</mat-error>
                     </mat-form-field>
                     <mat-form-field class="col-12" [ngStyle]="{'margin-top': '9px'}">
                         <mat-label [ngStyle]="{'color': 'rgb(255,0,0)', 'font-weight': 'bold'}">Corre Electrónico</mat-label>
                         <input matInput type="text"  formControlName="correo"/>
+                        <mat-error *ngIf="proveedorForm.get('correo')?.hasError('required')">El correo es requerida</mat-error>
                         <mat-error *ngIf="proveedorForm.get('correo')?.hasError('email')">El correo debe ser válido</mat-error>
                     </mat-form-field>
                     <mat-form-field class="col-12" [ngStyle]="{'margin-top': '9px'}">
                         <mat-label [ngStyle]="{'color': 'rgb(255,0,0)', 'font-weight': 'bold'}">Sitio Web</mat-label>
                         <input matInput type="text"  formControlName="web"/>
+                        <mat-error *ngIf="proveedorForm.get('web')?.hasError('required')">La URL es requerida</mat-error>
                         <mat-error *ngIf="proveedorForm.get('web')?.hasError('invalidUrl')">La URL no es válida</mat-error>
                     </mat-form-field>
                     <mat-form-field class="col-12" [ngStyle]="{'margin-top': '9px'}">
                         <mat-label [ngStyle]="{'color': 'rgb(255,0,0)', 'font-weight': 'bold'}">Dirección Física</mat-label>
                         <input matInput type="text"  formControlName="direccion"/>
+                        <mat-error *ngIf="proveedorForm.get('direccion')?.hasError('required')">La dirección es requerida</mat-error>
                     </mat-form-field>
 
                     <mat-label [ngStyle]="{'color': 'rgb(255,0,0)', 'font-weight': 'bold'}">País</mat-label>
@@ -51,6 +58,7 @@
                     <mat-form-field class="col-12" [ngStyle]="{'margin-top': '9px'}">
                         <mat-label [ngStyle]="{'color': 'rgb(255,0,0)', 'font-weight': 'bold'}">Facturación</mat-label>
                         <input matInput type="text"  formControlName="facturacion"/>
+                        <mat-error *ngIf="proveedorForm.get('facturacion')?.hasError('required')">La facturación es requerida</mat-error>
                         <mat-error *ngIf="proveedorForm.get('facturacion')?.hasError('invalidNumber')">El valor de facturación no es válido</mat-error>
                     </mat-form-field>
                 </form>

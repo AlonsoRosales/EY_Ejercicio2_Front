@@ -19,6 +19,7 @@ export class ScreeningProveedorComponent implements OnInit {
   public hits: number = 0;
   public fuente: number = 0;
   public entidad: string = "";
+  public isDataLoaded: boolean = false;
 
   /***  Definimos la lista de proveedores*/
   public resultadosPrimeraFuente:PrimeraFuente[] = [];
@@ -48,32 +49,33 @@ export class ScreeningProveedorComponent implements OnInit {
 
     // @ts-ignore
     this.entidadService.screeningProveeedor(nombre, selectedFuente).subscribe((r) => {
-      if(selectedFuente == '1'){
-        this.fuente = 1;
-        this.resultadosPrimeraFuente = r.msg.map((elemento: any) => {
-          return {
-            Entity: elemento.Entity,
-            Jurisdiction: elemento.Jurisdiction,
-            LinkedTo: elemento['Linked To'],
-            DataFrom: elemento['Data From']
-          };
-        });
-        this.dataSourcePrimeraFuente.data = this.resultadosPrimeraFuente;
-      }else if(selectedFuente == '2'){
-        this.fuente = 2;
-        this.resultadosSegundaFuente = r.msg.map((elemento: any) => {
-          return {
-            FirmName: elemento['Firm Name'],
-            Address: elemento.Address,
-            Country: elemento.Country,
-            FromDate: elemento['From Date (Ineligibility Period)'],
-            ToDate: elemento['To Date (Ineligibility Period)'],
-            Grounds: elemento.Grounds
-          };
-        });
-        this.dataSourceSegundaFuente.data = this.resultadosSegundaFuente;
-      }else if(selectedFuente == '3'){
-        this.fuente = 3;
+      if (Array.isArray(r.msg)) {
+        if(selectedFuente == '1'){
+          this.fuente = 1;
+          this.resultadosPrimeraFuente = r.msg.map((elemento: any) => {
+            return {
+              Entity: elemento.Entity,
+              Jurisdiction: elemento.Jurisdiction,
+              LinkedTo: elemento['Linked To'],
+              DataFrom: elemento['Data From']
+            };
+          });
+          this.dataSourcePrimeraFuente.data = this.resultadosPrimeraFuente;
+        }else if(selectedFuente == '2'){
+          this.fuente = 2;
+          this.resultadosSegundaFuente = r.msg.map((elemento: any) => {
+            return {
+              FirmName: elemento['Firm Name'],
+              Address: elemento.Address,
+              Country: elemento.Country,
+              FromDate: elemento['From Date (Ineligibility Period)'],
+              ToDate: elemento['To Date (Ineligibility Period)'],
+              Grounds: elemento.Grounds
+            };
+          });
+          this.dataSourceSegundaFuente.data = this.resultadosSegundaFuente;
+        }else if(selectedFuente == '3'){
+          this.fuente = 3;
           this.resultadosTerceraFuente = r.msg.map((elemento: any) => {
             return {
               Name: elemento.Name,
@@ -84,26 +86,37 @@ export class ScreeningProveedorComponent implements OnInit {
               Score: parseInt(elemento.Score)
             };
           });
-        this.dataSourceTerceraFuente.data = this.resultadosTerceraFuente;
+          this.dataSourceTerceraFuente.data = this.resultadosTerceraFuente;
+        }
+      }else{
+        this.dataSourcePrimeraFuente.data = [];
+        this.dataSourceSegundaFuente.data = [];
+        this.dataSourceTerceraFuente.data = [];
       }
+
+      this.isDataLoaded = true;
       this.hits = r.hitsFuente;
+    }, error => {
+      this.isDataLoaded = true;
     })
 
   }
 
   /***  Inicializamos la paginacion y el filtro de ordenamiento*/
   ngAfterViewInit(): void {
-    this.dataSourcePrimeraFuente.paginator = this.paginator;
-    this.dataSourcePrimeraFuente.sort = this.sort;
+    if (this.paginator && this.sort) {
+      this.dataSourcePrimeraFuente.paginator = this.paginator;
+      this.dataSourcePrimeraFuente.sort = this.sort;
 
-    this.dataSourceSegundaFuente.paginator = this.paginator;
-    this.dataSourceSegundaFuente.sort = this.sort;
+      this.dataSourceSegundaFuente.paginator = this.paginator;
+      this.dataSourceSegundaFuente.sort = this.sort;
 
-    this.dataSourceTerceraFuente.paginator = this.paginator;
-    this.dataSourceTerceraFuente.sort = this.sort;
+      this.dataSourceTerceraFuente.paginator = this.paginator;
+      this.dataSourceTerceraFuente.sort = this.sort;
 
-    this.paginator._intl.getRangeLabel =  this.getRangeDisplayText;
-    this.paginator._intl.itemsPerPageLabel="Proveedores por página";
+      this.paginator._intl.getRangeLabel = this.getRangeDisplayText;
+      this.paginator._intl.itemsPerPageLabel = "Proveedores por página";
+    }
   }
 
   /***  Metodo para modificar el texto de la tabla*/

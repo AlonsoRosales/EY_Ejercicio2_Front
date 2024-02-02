@@ -1,8 +1,9 @@
-<div class="title-container">
+<div class="title-container" *ngIf="isDataLoaded">
     <h1 class="title">Screening de {{entidad}}</h1>
 </div>
-
-<div class="mat-elevation-z8" *ngIf="fuente === 1">
+<h2 style="margin-left: 15px" *ngIf="isDataLoaded">Número de hits: {{hits}}</h2>
+<h3 style="margin-left: 15px" *ngIf="isDataLoaded">No se encontraron resultados</h3>
+<div class="mat-elevation-z8" *ngIf="fuente === 1 && hits != 0">
     <table mat-table [dataSource]="dataSourcePrimeraFuente" matSort>
         <ng-container matColumnDef="entity">
             <th mat-header-cell *matHeaderCellDef mat-sort-header [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">Entity</th>
@@ -27,12 +28,10 @@
             <td>
         </tr>
     </table>
-    <!--mat-paginator [pageSizeOptions]="[20,40,50]" showFirstLastButtons></mat-paginator-->
 </div>
 
 
-
-<div class="mat-elevation-z8" *ngIf="fuente === 2">
+<div class="mat-elevation-z8" *ngIf="fuente === 2 && hits != 0">
     <table mat-table [dataSource]="dataSourceSegundaFuente" matSort>
         <ng-container matColumnDef="firmdate">
             <th mat-header-cell *matHeaderCellDef mat-sort-header [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">FirmName</th>
@@ -65,13 +64,12 @@
             <td>
         </tr>
     </table>
-    <!--mat-paginator [pageSizeOptions]="[20,40,50]" showFirstLastButtons></mat-paginator-->
 </div>
 
 
 
 
-<div class="mat-elevation-z8" *ngIf="fuente === 3">
+<div class="mat-elevation-z8" *ngIf="fuente === 3 && hits != 0">
     <table mat-table [dataSource]="dataSourceTerceraFuente" matSort>
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">Name</th>
@@ -104,7 +102,6 @@
             <td>
         </tr>
     </table>
-    <!--mat-paginator [pageSizeOptions]="[20,40,50]" showFirstLastButtons></mat-paginator-->
 </div>
 
-
+<mat-paginator *ngIf="isDataLoaded && hits != 0" [pageSizeOptions]="[20,40,50]" showFirstLastButtons></mat-paginator>

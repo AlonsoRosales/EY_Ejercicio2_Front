@@ -29,4 +29,21 @@ export class AuthService{
         })
       );
   }
+
+  checkToken(): Observable<boolean>{
+      const token = sessionStorage.getItem("token");
+      if (token == null) {
+            return of(false);
+      }
+      const headers = new HttpHeaders({'Authorization': token});
+      return this.http.get(this.baseUrl + '/verify-token', { headers })
+          .pipe(
+              map((response: any) => {
+                  return response.success;
+              }),
+              catchError((error: any) => {
+                  return of(false);
+              })
+          );
+  }
 }
