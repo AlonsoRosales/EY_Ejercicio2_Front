@@ -1,0 +1,93 @@
+
+
+.limiter {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container-login100 {
+  position: absolute;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+   background-image: url("src/assets/Utils/Fondo.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  padding-right: 40px;
+}
+
+body{
+  line-height: 1.5;
+}
+
+.wrap-login100 {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 127px 100px 33px 95px;
+  margin: 0 auto;
+}
+
+.login100-pic {
+  width: 316px;
+}
+
+.login100-pic img {
+  max-width: 100%;
+}
+
+/** *************************************************** Responsive  **************************************************************/
+@media (max-width: 992px) {
+  .wrap-login100 {
+    padding: 87px 90px 33px 85px;
+    width: 50%;
+  }
+  .login100-pic {
+    display: none;
+  }
+  .login100-form {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrap-login100 {
+    padding: 87px 90px 33px 85px;
+    width: 50%;
+  }
+  .login100-pic {
+    display: none;
+  }
+  .login100-form {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .wrap-login100 {
+    padding: 87px 90px 33px 85px;
+    width: 85%;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+  .login100-form {
+    width: 100%;
+  }
+}

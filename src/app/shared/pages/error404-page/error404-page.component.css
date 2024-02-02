@@ -1,0 +1,21 @@
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 18px;
+  color: #003399;
+  text-align: center;
+  line-height: 1.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h1 span {
+  font-size: 20vw;
+}
+
+@media (max-width: 768px) {
+  h1 span {
+    font-size: 10vw;
+  }
+}

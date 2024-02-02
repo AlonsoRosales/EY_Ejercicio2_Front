@@ -1,0 +1,110 @@
+<div class="title-container">
+    <h1 class="title">Screening de {{entidad}}</h1>
+</div>
+
+<div class="mat-elevation-z8" *ngIf="fuente === 1">
+    <table mat-table [dataSource]="dataSourcePrimeraFuente" matSort>
+        <ng-container matColumnDef="entity">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">Entity</th>
+            <td mat-cell *matCellDef="let row"> {{row.Entity}} </td>
+        </ng-container>
+        <ng-container matColumnDef="jurisdiction">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">Jurisdiction</th>
+            <td mat-cell *matCellDef="let row"> {{row.Jurisdiction}} </td>
+        </ng-container>
+        <ng-container matColumnDef="linkedto">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">LinkedTo</th>
+            <td mat-cell *matCellDef="let row"> {{row.LinkedTo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="datafrom">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">DataFrom</th>
+            <td mat-cell *matCellDef="let row"> {{row.DataFrom}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsPrimeraFuente"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsPrimeraFuente;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="12" style="text-align:center">No se encontraron resultados para mostrar
+            <td>
+        </tr>
+    </table>
+    <!--mat-paginator [pageSizeOptions]="[20,40,50]" showFirstLastButtons></mat-paginator-->
+</div>
+
+
+
+<div class="mat-elevation-z8" *ngIf="fuente === 2">
+    <table mat-table [dataSource]="dataSourceSegundaFuente" matSort>
+        <ng-container matColumnDef="firmdate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">FirmName</th>
+            <td mat-cell *matCellDef="let row"> {{row.FirmName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">Address</th>
+            <td mat-cell *matCellDef="let row"> {{row.Address}} </td>
+        </ng-container>
+        <ng-container matColumnDef="country">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">Country</th>
+            <td mat-cell *matCellDef="let row"> {{row.Country}} </td>
+        </ng-container>
+        <ng-container matColumnDef="fromdate">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">FromDate</th>
+            <td mat-cell *matCellDef="let row"> {{row.FromDate}} </td>
+        </ng-container>
+        <ng-container matColumnDef="todate">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">ToDate</th>
+            <td mat-cell *matCellDef="let row"> {{row.ToDate}} </td>
+        </ng-container>
+        <ng-container matColumnDef="grounds">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">Grounds</th>
+            <td mat-cell *matCellDef="let row"> {{row.Grounds}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsSegundaFuente"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsSegundaFuente;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="12" style="text-align:center">No se encontraron resultados para mostrar
+            <td>
+        </tr>
+    </table>
+    <!--mat-paginator [pageSizeOptions]="[20,40,50]" showFirstLastButtons></mat-paginator-->
+</div>
+
+
+
+
+<div class="mat-elevation-z8" *ngIf="fuente === 3">
+    <table mat-table [dataSource]="dataSourceTerceraFuente" matSort>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">Name</th>
+            <td mat-cell *matCellDef="let row"> {{row.Name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">Address</th>
+            <td mat-cell *matCellDef="let row"> {{row.Address}} </td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">Type</th>
+            <td mat-cell *matCellDef="let row"> {{row.Type}} </td>
+        </ng-container>
+        <ng-container matColumnDef="programs">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">Program(s)</th>
+            <td mat-cell *matCellDef="let row"> {{row.Programs}} </td>
+        </ng-container>
+        <ng-container matColumnDef="list">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">List</th>
+            <td mat-cell *matCellDef="let row"> {{row.List}} </td>
+        </ng-container>
+        <ng-container matColumnDef="score">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'color': 'rgb(0,0,0)', 'font-weight': 'bold'}">Score</th>
+            <td mat-cell *matCellDef="let row"> {{row.Score}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsTercerFuente"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsTercerFuente;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="12" style="text-align:center">No se encontraron resultados para mostrar
+            <td>
+        </tr>
+    </table>
+    <!--mat-paginator [pageSizeOptions]="[20,40,50]" showFirstLastButtons></mat-paginator-->
+</div>
+
+

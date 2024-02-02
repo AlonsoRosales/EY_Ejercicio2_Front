@@ -1,0 +1,132 @@
+th.mat-header-cell, td.mat-cell {
+    padding: 12px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #e0e0e0;
+}
+
+th.mat-header-cell:last-child, td.mat-cell:last-child {
+    border-bottom: none;
+}
+
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0px;
+    padding: 0 15px;
+}
+
+.title {
+    font-size: 54px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+.mat-elevation-z8 {
+    box-shadow: 0px 3px 15px -4px rgba(0,0,0,0.2);
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: rgba(241, 214, 112, 0.89);
+    color: white;
+    padding: 8px;
+    text-align: left;
+}
+
+td {
+    padding: 8px;
+}
+
+a {
+    color: #14308b;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    margin-right: 8px;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+@media (max-width: 600px) {
+    .title-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .title {
+        margin-bottom: 10px;
+        flex-grow: 1;
+    }
+
+    td.mat-cell .edit-button,
+    td.mat-cell .screening-button,
+    td.mat-cell .delete-button {
+        padding: 4px 8px;
+        font-size: 0.75rem;
+    }
+
+    button {
+        align-self: flex-end;
+    }
+}
+
+@media (max-width: 768px) {
+    th, td {
+        padding: 8px 4px;
+    }
+}
+
+
+td.mat-cell .edit-button,
+td.mat-cell .screening-button,
+td.mat-cell .delete-button {
+    margin: 4px;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+    transition: background-color 0.3s;
+}
+
+td.mat-cell .edit-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+td.mat-cell .edit-button:hover {
+    background-color: #43a047;
+}
+
+td.mat-cell .screening-button {
+    background-color: #2196F3;
+    color: white;
+}
+
+td.mat-cell .screening-button:hover {
+    background-color: #1e88e5;
+}
+
+td.mat-cell .delete-button {
+    background-color: #f44336;
+    color: white;
+}
+
+td.mat-cell .delete-button:hover {
+    background-color: #e53935;
+}
